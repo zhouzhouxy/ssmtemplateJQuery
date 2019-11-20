@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .active{background-color: lightblue;}
+</style>
+<body>
+<div id="showUser">
+    <p class="show_title">用户管理</p>
+    <table border="1">
+        <thead>
+        <tr bgcolor="red">
+            <th>员工编号</th>
+            <th>员工姓名</th>
+            <th>真实姓名</th>
+            <th>性别</th>
+            <th>生日</th>
+            <th>职责</th>
+            <th>入职时间</th>
+            <th>学历</th>
+            <th>专业</th>
+            <th>经验</th>
+            <th>角色</th>
+            <th>领导</th>
+            <th>查看详情</th>
+            <th><input type="checkbox" id="all"></th>
+        </tr>
+        </thead>
+        <tbody style="display: none;" id="tr_template">
+        <tr>
+            <td class="employeeId"></td>
+            <td class="employeeName"></td>
+            <td class="realName"></td>
+            <td class="sex"></td>
+            <td class="birthday"></td>
+            <td class="duty"></td>
+            <td class="enrolldate"></td>
+            <td class="education"></td>
+            <td class="major"></td>
+            <td class="experience"></td>
+            <td class="roleName"></td>
+            <td class="parentName"></td>
+            <td>
+                <button class="viewDesc">查看详情</button>
+            </td>
+            <td>
+                <input type="checkbox" name="delRatio">
+            </td>
+        </tr>
+        </tbody>
+        <tbody id="tr_cln"></tbody>
+    </table>
+    <button id="delBtn">删除</button>
+    <!--分页-->
+    <div id="pager">
+        <a data-page="1">首页</a>
+        <a >末页</a>
+        <select id="pageSize">
+            <option>1</option>
+            <option>3</option>
+            <option selected="selected">5</option>
+        </select>
+        总共<span id="totalSize"></span>条数据
+        跳转<input type="text" id="pageNum">页
+    </div>
+</div>
+<div id="viewEmp" style="display: none">
+
+    <p class="show_title">员工详情</p>
+    <form id="empForm">
+    <p>
+        <span >编号</span>
+
+        <input disabled="disabled" class="employeeId"/>
+        <input type="hidden" class="employeeId" name="employeeId"/>
+    </p>
+    <p>
+        <span >员工姓名</span>
+        <input disabled="disabled" class="employeeName" name="employeeName">
+    </p>
+    <p>
+        <span >真实姓名</span>
+        <input disabled="disabled" class="realName" name="realName">
+    </p>
+  <p>
+    <span>性别</span>
+    <input class="sex" disabled="disabled" name="sex">
+</p>
+        <p>
+     <span >生日</span>
+         <input class="birthday" type="date" name="birthday">
+        </p>
+        <p>
+    <span >职责</span>
+    <input class="duty" type="text" name="duty"/>
+</p> <p>
+    <span >入职时间</span>
+    <input class="enrolldate" type="date" name="enrolldate">
+</p>
+
+        <p>
+    <span >学历</span>
+    <input class="education" type="text" name="education">
+</p> <p>
+    <span >专业</span>
+    <input class="major" type="text" name="major">
+</p> <p>
+    <span >经验</span>
+    <input class="experience" type="text" name="experience">
+</p> <p>
+    <span >角色</span>
+    <input class="roleId" type="text" name="roleId">
+</p>
+    <p>
+        <span>主管</span>
+        <select id="leader" name="parentId">
+
+        </select>
+    </p>
+
+    </form>
+    <button id="updateEmp">修改</button>
+</div>
+
+</body>
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script src="../../js/employeeManager.js"></script>
+</html>

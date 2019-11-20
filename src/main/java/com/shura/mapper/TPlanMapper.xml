@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shura.mapper.TPlanMapper">
+  <resultMap id="BaseResultMap" type="com.shura.entity.TPlan">
+  <id column="plan_id" jdbcType="INTEGER" property="planId" />
+  <result column="plan_name" jdbcType="VARCHAR" property="planName" />
+  <result column="status" jdbcType="VARCHAR" property="status" />
+  <result column="is_feedback" jdbcType="VARCHAR" property="isFeedback" />
+  <result column="begin_date" jdbcType="TIMESTAMP" property="beginDate" />
+  <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
+  <result column="task_id" jdbcType="INTEGER" property="taskId" />
+  <result column="feedback_info" jdbcType="VARCHAR" property="feedbackInfo" />
+  <result column="plan_desc" jdbcType="VARCHAR" property="planDesc" />
+</resultMap>
+
+  <resultMap id="allMap" type="com.shura.entity.TPlan">
+    <id column="plan_id" jdbcType="INTEGER" property="planId" />
+    <result column="plan_name" jdbcType="VARCHAR" property="planName" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="is_feedback" jdbcType="VARCHAR" property="isFeedback" />
+    <result column="begin_date" jdbcType="TIMESTAMP" property="beginDate" />
+    <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
+    <result column="task_id" jdbcType="INTEGER" property="taskId" />
+    <result column="feedback_info" jdbcType="VARCHAR" property="feedbackInfo" />
+    <result column="plan_desc" jdbcType="VARCHAR" property="planDesc" />
+    <result column="task_name" jdbcType="VARCHAR" property="task" />
+  </resultMap>
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+
+  <sql id="Base_Column_List">
+    plan_id, plan_name, status, is_feedback, begin_date, end_date, task_id, feedback_info,
+    plan_desc
+  </sql>
+
+  <select id="selectByExample" parameterType="com.shura.entity.TPlanExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_plan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_plan
+    where plan_id = #{planId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_plan
+    where plan_id = #{planId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shura.entity.TPlanExample">
+    delete from t_plan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shura.entity.TPlan">
+    insert into t_plan (plan_id, plan_name, status,
+      is_feedback, begin_date, end_date,
+      task_id, feedback_info, plan_desc
+      )
+    values (#{planId,jdbcType=INTEGER}, #{planName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+      #{isFeedback,jdbcType=VARCHAR}, #{beginDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP},
+      #{taskId,jdbcType=INTEGER}, #{feedbackInfo,jdbcType=VARCHAR}, #{planDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shura.entity.TPlan">
+    insert into t_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="planId != null">
+        plan_id,
+      </if>
+      <if test="planName != null">
+        plan_name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isFeedback != null">
+        is_feedback,
+      </if>
+      <if test="beginDate != null">
+        begin_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="feedbackInfo != null">
+        feedback_info,
+      </if>
+      <if test="planDesc != null">
+        plan_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="planId != null">
+        #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="planName != null">
+        #{planName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isFeedback != null">
+        #{isFeedback,jdbcType=VARCHAR},
+      </if>
+      <if test="beginDate != null">
+        #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="feedbackInfo != null">
+        #{feedbackInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="planDesc != null">
+        #{planDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shura.entity.TPlanExample" resultType="java.lang.Long">
+    select count(*) from t_plan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_plan
+    <set>
+      <if test="record.planId != null">
+        plan_id = #{record.planId,jdbcType=INTEGER},
+      </if>
+      <if test="record.planName != null">
+        plan_name = #{record.planName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFeedback != null">
+        is_feedback = #{record.isFeedback,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginDate != null">
+        begin_date = #{record.beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null">
+        end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.taskId != null">
+        task_id = #{record.taskId,jdbcType=INTEGER},
+      </if>
+      <if test="record.feedbackInfo != null">
+        feedback_info = #{record.feedbackInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planDesc != null">
+        plan_desc = #{record.planDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_plan
+    set plan_id = #{record.planId,jdbcType=INTEGER},
+    plan_name = #{record.planName,jdbcType=VARCHAR},
+    status = #{record.status,jdbcType=VARCHAR},
+    is_feedback = #{record.isFeedback,jdbcType=VARCHAR},
+    begin_date = #{record.beginDate,jdbcType=TIMESTAMP},
+    end_date = #{record.endDate,jdbcType=TIMESTAMP},
+    task_id = #{record.taskId,jdbcType=INTEGER},
+    feedback_info = #{record.feedbackInfo,jdbcType=VARCHAR},
+    plan_desc = #{record.planDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shura.entity.TPlan">
+    update t_plan
+    <set>
+      <if test="planName != null">
+        plan_name = #{planName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isFeedback != null">
+        is_feedback = #{isFeedback,jdbcType=VARCHAR},
+      </if>
+      <if test="beginDate != null">
+        begin_date = #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="feedbackInfo != null">
+        feedback_info = #{feedbackInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="planDesc != null">
+        plan_desc = #{planDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where plan_id = #{planId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shura.entity.TPlan">
+    update t_plan
+    set plan_name = #{planName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      is_feedback = #{isFeedback,jdbcType=VARCHAR},
+      begin_date = #{beginDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP},
+      task_id = #{taskId,jdbcType=INTEGER},
+      feedback_info = #{feedbackInfo,jdbcType=VARCHAR},
+      plan_desc = #{planDesc,jdbcType=VARCHAR}
+    where plan_id = #{planId,jdbcType=INTEGER}
+  </update>
+</mapper>

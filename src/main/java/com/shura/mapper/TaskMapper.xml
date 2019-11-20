@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shura.mapper.TaskMapper">
+<insert id="insert" parameterType="com.shura.entity.TTask">
+    insert into t_task (task_id, task_name, begin_date,
+    end_date, real_begin_date, real_end_date,
+    status, implementor_id, assigner_id,
+    task_desc)
+    values (#{taskId,jdbcType=INTEGER}, #{taskName,jdbcType=VARCHAR}, #{beginDate,jdbcType=TIMESTAMP},
+    #{endDate,jdbcType=TIMESTAMP}, #{realBeginDate,jdbcType=TIMESTAMP}, #{realEndDate,jdbcType=TIMESTAMP},
+    #{status,jdbcType=VARCHAR}, #{implementorId,jdbcType=INTEGER}, #{assignerId,jdbcType=INTEGER},
+    #{taskDesc,jdbcType=VARCHAR})
+</insert>
+</mapper>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户管理</title>
+</head>
+<style>
+    #pager{margin-top: 8px;}
+    #pager a {padding: 5px 10px;}
+    .active{background-color: lightblue;}
+    .show_title{
+        color: #de212a;
+        font-size: 18px;
+    }
+    label{
+        background-color: #d32126;
+        color: white;
+    }
+    #planDetail span{
+        background-color: #d32126;
+        color: white;
+    }
+    #taskDetail input ,#planDetail input{
+        position: relative;
+        left: -5px;
+        height: 20px;
+        top: -2px;
+        background-color: darkgray;
+        border: 0;
+    }
+</style>
+<body>
+    <div id="addUser">
+        <button id="add">添加用户</button>
+        <p class="show_title">显示所有的用户</p>
+        <table border="1">
+            <thead>
+                <tr bgcolor="red">
+                    <th>员工编号</th>
+                    <th>员工姓名</th>
+                    <th>真实姓名</th>
+                    <th>性别</th>
+                    <th>生日</th>
+                    <th>职责</th>
+                    <th>入职时间</th>
+                    <th>学历</th>
+                    <th>专业</th>
+                    <th>经验</th>
+                    <th>角色</th>
+                    <th>领导</th>
+                </tr>
+            </thead>
+            <tbody style="display: none;" id="tr_template">
+                <tr>
+                    <td class="employeeId"></td>
+                    <td class="employeeName"></td>
+                    <td class="realName"></td>
+                    <td class="sex"></td>
+                    <td class="birthday"></td>
+                    <td class="duty"></td>
+                    <td class="enrolldate"></td>
+                    <td class="education"></td>
+                    <td class="major"></td>
+                    <td class="experience"></td>
+                    <td class="roleName"></td>
+                    <td class="parentName"></td>
+                </tr>
+            </tbody>
+            <tbody id="tr_cln"></tbody>
+        </table>
+        <!--分页-->
+        <div id="pager">
+            <a data-page="1">首页</a>
+            <a >末页</a>
+            <select id="pageSize">
+                <option>1</option>
+                <option>3</option>
+                <option selected="selected">5</option>
+            </select>
+            总共<span id="totalSize"></span>条数据
+            跳转<input type="text" id="pageNum">页
+        </div>
+    </div>
+    <!--添加员工-->
+    <div id="addEmployee" style="display: none;">
+        <p class="show_title">添加员工</p>
+        <form id="addEmp">
+            <p>
+                <label>员工姓名</label>
+                <input type="text" name="employeeName" required>
+            </p>
+            <p>
+                <label>真实姓名</label>
+                <input type="text" name="realName" required>
+            </p>
+            <p>
+                <label>密码</label>
+                <input type="password" name="password" id="password" required>
+            </p>
+            <p>
+                <label>确认密码</label>
+                <input type="password" name="confirm_password" required>
+            </p>
+            <p>
+                <span>性别</span>
+                男  <input type="radio" name="sex" value="M" required>
+                女 <input type="radio" name="sex" value="W" required>
+            </p>
+            <p>
+                <label>生日</label>
+                <input type="date" name="birthday" required>
+            </p>
+            <p>
+                <label>职责</label>
+                <input type="text" name="duty" required>
+            </p>
+            <p>
+                <label>入职时间</label>
+                <input type="date" name="enrolldate" required>
+            </p>
+            <p>
+                <label>学历</label>
+                <input type="text" name="education" required>
+            </p>
+            <p>
+                <label>专业</label>
+                <input type="text" name="major" required>
+            </p>
+            <p>
+                <label>经验</label>
+                <input type="text" name="experience" required>
+            </p>
+            <p>
+                <label>角色</label>
+                <select name="roleId" id="role" required>
+                    <option value="1">系统管理员</option>
+                    <option value="2">主管</option>
+                    <option value="3" >普通员工</option>
+                </select>
+            </p>
+            <p>
+                <label>领导</label>
+                  <select name="parentId" id="parent">
+                      <option value="0">请选择</option>
+                </select>
+            </p>
+            <input type="submit">
+        </form>
+    </div>
+</body>
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script src="https://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<script src="../../js/manager.js"></script>
+</html>

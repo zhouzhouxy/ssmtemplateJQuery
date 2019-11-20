@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #cd{
+        margin: auto;
+        border:1px red solid;
+    }
+    #viewDetail{
+        position: relative;
+        left: 400px;
+    }
+    #pager{margin-top: 8px;}
+    #pager a {padding: 5px 10px;}
+    .active{background-color: lightblue;}
+    .show_title{
+        color: #de212a;
+        font-size: 18px;
+    }
+    label{
+        background-color: #d32126;
+        color: white;
+    }
+    #planDetail span{
+        background-color: #d32126;
+        color: white;
+    }
+    #planD{
+        background-color: darkgray;
+    }
+    .right_span{
+        position: relative;
+        /*left: -5px;*/
+        height: 20px;
+        background-color: #d32126;
+        color: white;
+        border: 0;
+    }
+    #taskDetail input ,#planDetail input{
+        position: relative;
+        left: -5px;
+        height: 20px;
+        top: -2px;
+        background-color: darkgray;
+        border: 0;
+    }
+    #detailMsg{
+        position: relative;
+        left:300px;
+    }
+    #planInfoBtn{
+        position: relative;
+        left:300px;
+    }
+</style>
+<body>
+    <!--任务详细信息-->
+    <div id="taskDetail" style="display:none">
+        <p class="show_title">任务详细信息</p>
+        <div id="planD" >
+            <p>
+                <span class="right_span">任务名称</span>
+                <span id="taskName"></span>
+            </p>
+            <p>
+                <span class="right_span">任务描述</span>
+                <span id="taskDesc"></span>
+            </p>
+            <p>
+                <span class="right_span">开始时间</span>
+                <span id="beginDate"></span>
+                <span class="right_span">结束</span>
+                <span id="endDate"></span>
+            </p>
+            <p>
+                <span class="right_span">实际开始时间</span>
+                <span id="real_beginDate"></span>
+                <span class="right_span">实际结束时间</span>
+                <span id="real_endDate"></span>
+            </p>
+            <p>
+                <span class="right_span">实施人</span>
+                <span id="employeeName"></span>
+                <span class="right_span">任务状态</span>
+                <span id="taskStatus"></span>
+            </p>
+        </div>
+        <p class="show_title">实施计划：</p>
+        <table border="1">
+            <thead>
+                <tr bgcolor="red">
+                    <th>计划名称</th>
+                    <th>完成状态</th>
+                    <th>是否反馈</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="plan_template" style="display: none;">
+                <tr>
+                    <td class="planName"></td>
+                    <td class="status"></td>
+                    <td class="isFeedback"></td>
+                    <td class="beginDate"></td>
+                    <td class="endDate"></td>
+                    <td class="planRatio">
+                        <input type="radio" name="plan_ratio">
+                    </td>
+                </tr>
+            </tbody>
+            <tbody id="plan_info">
+
+            </tbody>
+        </table>
+            <button id="planInfoBtn">详细信息</button>
+    </div>
+
+    <!--任务信息-->
+    <div id="cd">
+       <p class="show_title">任务信息</p>
+        <table border="1px">
+            <thead>
+                <tr bgcolor="aqua">
+                    <th onclick="order('task_name')">任务名称</th>
+                    <th onclick="order('implementor_id')">实施人</th>
+                    <th onclick="order('begin_date')">开始时间</th>
+                    <th onclick="order('end_date')">结束时间</th>
+                    <th onclick="order('status')">任务状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="template" style="display:none;">
+                <tr>
+                    <td class="taskName"></td>
+                    <td class="implementorId"></td>
+                    <td class="beginDate"></td>
+                    <td class="endDate"></td>
+                    <td class="status"></td>
+                    <td class="operation">
+                        <input type="radio"  name="viewDesc">
+                    </td>
+                </tr>
+            </tbody>
+            <tbody id="tblBook"></tbody>
+        </table>
+            <button id="viewDetail">详细信息</button>
+
+        <div id="pager">
+            <a data-page="1">首页</a>
+            <a >末页</a>
+            <select id="pageSize">
+                <option>5</option>
+                <option>7</option>
+                <option>9</option>
+            </select>
+            总共<span id="totalSize"></span>条数据
+            跳转<input type="text" id="pageNum">页
+        </div>
+    </div>
+
+    <!--计划详细-->
+    <div id="planDetail" style="display: none;">
+        <p class="show_title">计划详细</p>
+        <div id="planDesc">
+            <p>
+                <span>计划名称</span>
+                <input type="text" value="111" class="planName">
+            </p>
+            <p>
+<!--                <label for="planDesc">计划描述</label>-->
+                <span>计划描述</span>
+                <input type="text" class="planDesc">
+            </p>
+            <p>
+<!--                <label for="planBeginDate">开始时间</label>-->
+                <span>开始时间</span>
+                <input type="text" class="beginDate">
+<!--                <label for="planEndDate">结束时间</label>-->
+                <span>结束时间</span>
+                <input type="text" class="endDate">
+            </p>
+            <p>
+<!--                <label for="task">所属任务</label>-->
+                <span>所属任务</span>
+                <input type="text" class="taskName">
+<!--                <label for="planStatus">计划状态</label>-->
+                <span>计划状态</span>
+                <input type="text" class="status">
+            </p>
+            <p>
+<!--                <label for="feedbackInfo">反馈信息</label>-->
+                <span>反馈信息</span>
+                <input type="text" class="feedbackInfo">
+            </p>
+        </div>
+        <button id="returnTask">返回</button>
+    </div>
+</body>
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script src="../../js/viewTask.js"></script>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form id="forms">
+        <p>任务名称
+            <input type="text" name="taskName">
+        </p>
+        <p>
+            任务描述:
+            <textarea cols="15" name="taskDesc"></textarea>
+        </p>
+        <p>
+            开始时间:<input type="date" name="beignDate" >
+            结束时间:<input type="date" name="endDate">
+        </p>
+        <p>实施人：
+            <select name="implementorId" id="setEmployee"></select>
+        </p>
+        <p>任务状态：<input type="text" value="未实施"></p>
+        <input type="reset" value="重置">
+        <input type="button" value="提交" id="sub">
+    </form>
+</body>
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script src="../../js/setTask.js"></script>
+</html>

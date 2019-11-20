@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="itemService" class="com.shura.service.impl.ItemSeviceImpl">
+        <property name="itemMapper" ref="itemMapper"/>
+    </bean>
+
+    <bean id="employeeService" class="com.shura.service.impl.EmployeeServiceImpl">
+        <property name="employeeMapper" ref="TEmployeeMapper"/>
+    </bean>
+
+    <bean id="menuService" class="com.shura.service.impl.MenuServiceImpl">
+        <property name="menuMapper" ref="menuMapper"/>
+    </bean>
+
+    <bean id="taskService" class="com.shura.service.impl.TaskServiceImpl">
+        <property name="taskMapper" ref="TTaskMapper"/>
+    </bean>
+
+    <bean id="planService" class="com.shura.service.impl.PlanServiceImpl">
+        <property name="planMapper" ref="TPlanMapper"/>
+    </bean>
+
+    <bean id="roleService" class="com.shura.service.impl.RoleServiceImpl">
+        <property name="roleMapper" ref="TRoleMapper"/>
+    </bean>
+    <!--加载db.properties-->
+    <bean id="config" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="locations">
+            <array>
+                <value>classpath:db.properties</value>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--加载mapper.xml路径-->
+        <property name="mapperLocations" value="classpath:com/shura/mapper/*.xml"/>
+        <!--配置分页插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            　helperDialect=mysql
+                            　　　　　　　　　　　　 </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+
+    </bean>
+
+
+    <!-- 配置配置数据库信息（替代mybatis的配置文件conf.xml） -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${driver}"></property>
+        <property name="url" value="${url}"></property>
+        <property name="username" value="${username}"></property>
+        <property name="password" value="${password}"></property>
+    </bean>
+
+    <!--将MyBatis的SqlSessionFactory交给Spring-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.shura.mapper"/>
+        <!--上面basePackage所在的property的作用：-->
+    </bean>
+</beans>

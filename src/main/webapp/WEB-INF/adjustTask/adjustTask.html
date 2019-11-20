@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .active{background-color: lightblue;}
+    .show_title{
+        color: #de212a;
+        font-size: 18px;
+    }
+    #delBtn{
+        position: relative;
+        left: 200px;
+    }
+    label{
+        background-color: #d32126;
+        color: white;
+    }
+    #adjustTaskInfo{
+        background-color: gray;
+    }
+    input{
+        position: relative;
+        right: 5px;
+        top: -2px;
+    }
+
+</style>
+<body>
+        <div id="unimplmented">
+            <p class="show_title">未实施任务信息</p>
+            <table border="1">
+                <thead>
+                    <tr bgcolor="red">
+                        <th onclick="desc('task_name')">任务名称</th>
+                        <th onclick="desc('implementor_id')">实施人</th>
+                        <th onclick="desc('begin_date')">开始时间</th>
+                        <th onclick="desc('end_date')">结束时间</th>
+                        <th onclick="desc('status')">任务状态</th>
+                        <th><input type="checkbox" id="all"></th>
+                    </tr>
+                </thead>
+                <tbody id="tr_template" style="display: none">
+                    <tr>
+                    <td ><a href="#"  class="taskName"></a></td>
+                    <td class="implementor_id"></td>
+                        <td class="beginDate"></td>
+                        <td class="endDate"></td>
+                        <td class="status"></td>
+                        <td class="operation">
+                            <input type="checkbox" name="delRatio">
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody id="tr_cln"></tbody>
+            </table>
+            <button id="delBtn">删除</button>
+            <!--分页-->
+            <div id="pager">
+                <a data-page="1">首页</a>
+                <a >末页</a>
+                <select id="pageSize">
+                    <option>5</option>
+                    <option>7</option>
+                    <option>9</option>
+                </select>
+                总共<span id="totalSize"></span>条数据
+                跳转<input type="text" id="pageNum">页
+            </div>
+        </div>
+        <div id="taskInfo" style="display: none;">
+            <p class="show_title">调整任务信息 </p>
+                <form>
+                    <div id="adjustTaskInfo">
+                <p>
+                    <input type="hidden" id="taskId" name="taskId">
+                    <label for="taskName">任务名称</label>
+                    <input type="text" id="taskName" name="taskName">
+                </p>
+                <p>
+                    <label for="taskDesc">任务描述</label>
+                    <textarea id="taskDesc" name="taskDesc" cols="15" rows="3"></textarea>
+                </p>
+                <p>
+                    <label for="beginDate">开始时间</label>
+                    <input type="Date" id="beginDate" name="beginDate">
+                     <label for="endDate">结束时间</label>
+                    <input type="Date" id="endDate" name="endDate">
+                </p>
+                <p>
+                    <label for="employeeName">实施人</label>
+                    <select id="employeeName" name="implementor_id"></select>
+                     <label for="status">计划状态</label>
+                    <input type="text" disabled="disabled" id="status" value="未实施" name="status">
+                </p>
+                    </div>
+                    <input type="button" id="reset" value="重置">
+                    <input type="submit" id="sub" value="提交">
+                </form>
+
+        </div>
+</body>
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script src="../../js/adjustTask.js"></script>
+</html>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跟踪任务</title>
+</head>
+<style>
+    #pager{margin-top: 8px;}
+    #pager a {padding: 5px 10px;}
+    .active{background-color: lightblue;}
+    .show_title{
+        color: #de212a;
+        font-size: 18px;
+    }
+    label{
+        background-color: #d32126;
+        color: white;
+    }
+    #planDetail span{
+        background-color: #d32126;
+        color: white;
+    }
+    #planD{
+        background-color: darkgray;
+    }
+    .right_span{
+        position: relative;
+        /*left: -5px;*/
+        height: 20px;
+        background-color: #d32126;
+        color: white;
+        border: 0;
+    }
+    #taskDetail input ,#planDetail input{
+        position: relative;
+        left: -5px;
+        height: 20px;
+        top: -2px;
+        background-color: darkgray;
+        border: 0;
+    }
+</style>
+<body>
+    <!--跟踪任务：-->
+    <div id="trakTask">
+        <hr>
+        <p class="showTitle">跟踪任务:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>任务名称</th>
+                    <th>实施人</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>任务状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="tr_template" style="display: none;">
+            <tr>
+                <td class="taskName"></td>
+                <td class="implementor_id"></td>
+                <td class="beginDate"></td>
+                <td class="endDate"></td>
+                <td class="status"></td>
+                <td class="operation">
+                    <input type="radio" name="planRatio">
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="tr_cln">
+
+            </tbody>
+        </table>
+        <button id="planInfo">任务信息</button>
+        <!--分页-->
+        <div id="pager">
+            <a data-page="1">首页</a>
+            <a >末页</a>
+            <select id="pageSize">
+                <option>1</option>
+                <option>3</option>
+                <option selected="selected">5</option>
+            </select>
+            总共<span id="totalSize"></span>条数据
+            跳转<input type="text" id="pageNum">页
+        </div>
+    </div>
+
+    <!--任务详细信息-->
+    <div id="taskDetail" style="display:none">
+        <p class="show_title">任务详细信息</p>
+        <div id="planD" >
+            <p>
+                <span class="right_span">任务名称</span>
+                <span id="taskName"></span>
+            </p>
+            <p>
+                <span class="right_span">任务描述</span>
+                <span id="taskDesc"></span>
+            </p>
+            <p>
+                <span class="right_span">开始时间</span>
+                <span id="beginDate"></span>
+                <span class="right_span">结束</span>
+                <span id="endDate"></span>
+            </p>
+            <p>
+                <span class="right_span">实施人</span>
+                <span id="employeeName"></span>
+                <span class="right_span">任务状态</span>
+<!--                <span id="taskStatus"></span>-->
+                <select id="taskStaus" >
+                    <option value="实施中">实施中</option>
+                    <option value="已完成">已完成</option>
+                </select>
+            </p>
+        </div>
+        <button id="updateTaskInfo">修改</button>
+        <p class="show_title">实施计划：</p>
+        <table border="1">
+            <thead>
+            <tr bgcolor="red">
+                <th>计划名称</th>
+                <th>完成状态</th>
+                <th>是否反馈</th>
+                <th>开始时间</th>
+                <th>结束时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="plan_template" style="display: none;">
+            <tr>
+                <td class="planName"></td>
+                <td class="status"></td>
+                <td class="isFeedback"></td>
+                <td class="beginDate"></td>
+                <td class="endDate"></td>
+                <td class="planRatio">
+                    <input type="checkbox" name="plan_ratio">
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="plan_info">
+
+            </tbody>
+        </table>
+        <button id="feedBackInfo">反馈信息</button>
+    </div>
+
+</body>
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script src="../../js/trackTask.js"></script>
+</html>

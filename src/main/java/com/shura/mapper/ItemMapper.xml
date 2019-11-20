@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shura.mapper.ItemMapper">
+    <!--查询所有-->
+    <select id="queryItem" parameterType="com.shura.entity.Item" resultType="com.shura.entity.Item">
+        select * from tb_item
+        <where>
+        <if test="#{title}!=null">
+            and title=#{title}
+        </if>
+        <if test="#{category}!=null">
+            and category=#{category}
+        </if>
+    </where>
+    </select>
+
+    <select id="queryItems" parameterType="string" resultType="com.shura.entity.Item">
+        select * from tb_item
+        <if test="#{0}!=null">
+            where title like  CONCAT('%',#{0},'%')
+        </if>
+    </select>
+
+    <delete id="deleteItemsById" parameterType="int">
+        delete from tb_item where id=#{id}
+    </delete>
+
+    <!--查询所有的数据-->
+    <select id="queryTotal" resultType="int">
+        select count(*) from tb_item
+    </select>
+
+    <!--插入一条数据-->
+    <insert id="insertItem" parameterType="com.shura.entity.Item">
+        insert into tb_item(id,title,price,brand) values(#{id},#{title},#{price},#{brand})
+    </insert>
+</mapper>

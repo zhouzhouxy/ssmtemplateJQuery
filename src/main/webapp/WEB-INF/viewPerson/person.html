@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #pager{margin-top: 8px;}
+    #pager a {padding: 5px 10px;}
+    .active{background-color: lightblue;}
+    .show_title{
+        color: #de212a;
+        font-size: 18px;
+    }
+    label{
+        background-color: #d32126;
+        color: white;
+    }
+    #planDetail span{
+        background-color: #d32126;
+        color: white;
+    }
+    #taskDetail input ,#planDetail input{
+        position: relative;
+        left: -5px;
+        height: 20px;
+        top: -2px;
+        background-color: darkgray;
+        border: 0;
+    }
+</style>
+<body>
+    <div id="showPerson">
+        <p class="show_title">人员信息</p>
+        <table border="1">
+            <thead>
+                <tr bgcolor="red">
+                    <td>姓名</td>
+                    <td>性别</td>
+                    <td>入职时间</td>
+                    <td>职位</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody id="tr_template" style="display: none;">
+                <tr>
+                    <td class="employeeName"></td>
+                    <td class="sex"></td>
+                    <td class="enrolldate"></td>
+                    <td class="duty"></td>
+                    <td>
+                        <input type="radio" name="employeeId" class="employeeIds"/>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody id="tr_cln">
+
+            </tbody>
+        </table>
+        <button id="employeeInfo">详细信息</button>
+        <!--分页-->
+        <div id="pager">
+            <a data-page="1">首页</a>
+            <a >末页</a>
+            <select id="pageSize">
+                <option>1</option>
+                <option>3</option>
+                <option selected="selected">5</option>
+            </select>
+            总共<span id="totalSize"></span>条数据
+            跳转<input type="text" id="pageNum">页
+        </div>
+    </div>
+    <div id="showPersonDetail" style="display: none">
+        <p class="show_title">人员详细信息</p>
+        <table border="1">
+            <tr bgcolor="red">
+                <th>姓名</th>
+                <th>性别</th>
+                <th>入职时间</th>
+                <th>职位</th>
+            </tr>
+            <tbody id="descEmployee">
+                <tr bgcolor="#dcdcdc">
+                    <td class="employeeName"></td>
+                    <td class="sex"></td>
+                    <td class="enrolldate"></td>
+                    <td class="duty"></td>
+                </tr>
+                <tr>
+                    <td bgcolor="red">出生年月</td>
+                    <td colspan="3" bgcolor="#dcdcdc" class="birthday"></td>
+                </tr>
+                <tr>
+                    <td bgcolor="red">学历</td>
+                    <td colspan="3"   bgcolor="#dcdcdc" class="education"></td>
+                </tr>
+                <tr>
+                    <td bgcolor="red">专业</td>
+                    <td colspan="3" bgcolor="#dcdcdc" class="major"></td>
+                </tr>
+                <tr>
+                    <td bgcolor="red" rowspan="3">行业经历</td>
+                    <td colspan="3"  bgcolor="#dcdcdc" rowspan="3" class="experience"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="return">返回</button>
+    </div>
+</body>
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script src="../../js/person.js"></script>
+</html>

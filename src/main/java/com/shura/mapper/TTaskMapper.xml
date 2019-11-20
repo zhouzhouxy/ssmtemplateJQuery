@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shura.mapper.TTaskMapper">
+  <resultMap id="BaseResultMap" type="com.shura.entity.TTask">
+    <id column="task_id" jdbcType="INTEGER" property="taskId" />
+    <result column="task_name" jdbcType="VARCHAR" property="taskName" />
+    <result column="begin_date" jdbcType="TIMESTAMP" property="beginDate" />
+    <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
+    <result column="real_begin_date" jdbcType="TIMESTAMP" property="realBeginDate" />
+    <result column="real_end_date" jdbcType="TIMESTAMP" property="realEndDate" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="implementor_id" jdbcType="INTEGER" property="implementorId" />
+    <result column="assigner_id" jdbcType="INTEGER" property="assignerId" />
+    <result column="task_desc" jdbcType="VARCHAR" property="taskDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    task_id, task_name, begin_date, end_date, real_begin_date, real_end_date, status,
+    implementor_id, assigner_id, task_desc
+  </sql>
+  <select id="selectByExample" parameterType="com.shura.entity.TTaskExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shura.entity.TTaskExample">
+    delete from t_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+
+  <insert id="insert" parameterType="com.shura.entity.TTask">
+    insert into t_task (task_id, task_name, begin_date,
+      end_date, real_begin_date, real_end_date,
+      status, implementor_id, assigner_id,
+      task_desc)
+    values (#{taskId,jdbcType=INTEGER}, #{taskName,jdbcType=VARCHAR}, #{beginDate,jdbcType=TIMESTAMP},
+      #{endDate,jdbcType=TIMESTAMP}, #{realBeginDate,jdbcType=TIMESTAMP}, #{realEndDate,jdbcType=TIMESTAMP},
+      #{status,jdbcType=VARCHAR}, #{implementorId,jdbcType=INTEGER}, #{assignerId,jdbcType=INTEGER},
+      #{taskDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shura.entity.TTask">
+    insert into t_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="taskName != null">
+        task_name,
+      </if>
+      <if test="beginDate != null">
+        begin_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="realBeginDate != null">
+        real_begin_date,
+      </if>
+      <if test="realEndDate != null">
+        real_end_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="implementorId != null">
+        implementor_id,
+      </if>
+      <if test="assignerId != null">
+        assigner_id,
+      </if>
+      <if test="taskDesc != null">
+        task_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null">
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginDate != null">
+        #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realBeginDate != null">
+        #{realBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realEndDate != null">
+        #{realEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="implementorId != null">
+        #{implementorId,jdbcType=INTEGER},
+      </if>
+      <if test="assignerId != null">
+        #{assignerId,jdbcType=INTEGER},
+      </if>
+      <if test="taskDesc != null">
+        #{taskDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shura.entity.TTaskExample" resultType="java.lang.Long">
+    select count(*) from t_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_task
+    <set>
+      <if test="record.taskId != null">
+        task_id = #{record.taskId,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskName != null">
+        task_name = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginDate != null">
+        begin_date = #{record.beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null">
+        end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.realBeginDate != null">
+        real_begin_date = #{record.realBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.realEndDate != null">
+        real_end_date = #{record.realEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.implementorId != null">
+        implementor_id = #{record.implementorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.assignerId != null">
+        assigner_id = #{record.assignerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskDesc != null">
+        task_desc = #{record.taskDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_task
+    set task_id = #{record.taskId,jdbcType=INTEGER},
+      task_name = #{record.taskName,jdbcType=VARCHAR},
+      begin_date = #{record.beginDate,jdbcType=TIMESTAMP},
+      end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      real_begin_date = #{record.realBeginDate,jdbcType=TIMESTAMP},
+      real_end_date = #{record.realEndDate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=VARCHAR},
+      implementor_id = #{record.implementorId,jdbcType=INTEGER},
+      assigner_id = #{record.assignerId,jdbcType=INTEGER},
+      task_desc = #{record.taskDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shura.entity.TTask">
+    update t_task
+    <set>
+      <if test="taskName != null">
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginDate != null">
+        begin_date = #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realBeginDate != null">
+        real_begin_date = #{realBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realEndDate != null">
+        real_end_date = #{realEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="implementorId != null">
+        implementor_id = #{implementorId,jdbcType=INTEGER},
+      </if>
+      <if test="assignerId != null">
+        assigner_id = #{assignerId,jdbcType=INTEGER},
+      </if>
+      <if test="taskDesc != null">
+        task_desc = #{taskDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shura.entity.TTask">
+    update t_task
+    set task_name = #{taskName,jdbcType=VARCHAR},
+      begin_date = #{beginDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP},
+      real_begin_date = #{realBeginDate,jdbcType=TIMESTAMP},
+      real_end_date = #{realEndDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      implementor_id = #{implementorId,jdbcType=INTEGER},
+      assigner_id = #{assignerId,jdbcType=INTEGER},
+      task_desc = #{taskDesc,jdbcType=VARCHAR}
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+</mapper>

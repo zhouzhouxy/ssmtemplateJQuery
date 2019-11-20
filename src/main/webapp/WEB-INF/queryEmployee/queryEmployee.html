@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #pager{margin-top: 8px;}
+    #pager a {padding: 5px 10px;}
+    .active{background-color: lightblue;}
+    .show_title{
+        color: #de212a;
+        font-size: 18px;
+    }
+    label{
+        background-color: #d32126;
+        color: white;
+    }
+    #planDetail span{
+        background-color: #d32126;
+        color: white;
+    }
+    #taskDetail input ,#planDetail input{
+        position: relative;
+        left: -5px;
+        height: 20px;
+        top: -2px;
+        background-color: darkgray;
+        border: 0;
+    }
+</style>
+<body>
+    <div id="queryCondition">
+        <p class="show_title">查询条件</p>
+        <form id="myForm">
+            <p>
+                <label>计划名称</label>
+                <input type="text" name="planName">
+            </p>
+            <p>
+                <label>所属任务</label>
+                <select id="sel" name="taskId">
+                    <option value="0">请选择</option>
+                </select>
+            </p>
+            <p>
+                <label>开始时间</label>
+                 从 <input type="date" name="beginDate1">到
+                <input type="date" name="beginDate2">
+            </p>
+            <p>
+                <label>结束时间</label>
+                从 <input type="date" name="endDate">到
+                <input type="date" name="endDate2">
+            </p>
+            <p>
+                <label>是否反馈</label>
+                <input type="text" name="feedBackInfo">
+            </p>
+        </form>
+        <button id="queryPlan">查询计划</button>
+    </div>
+    <div id="planInfo">
+        <p class="show_title">计划信息</p>
+        <table border="1">
+            <thead>
+                <tr bgcolor="red">
+                    <th>计划名称</th>
+                    <th>所属任务</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>计划状态</th>
+                    <th>是否反馈</th>
+                </tr>
+            </thead>
+            <tbody id="tr_template" style="display: none;">
+            <tr>
+                <td class="planName"></td>
+                <td class="taskName"></td>
+                <td class="beginDate"></td>
+                <td class="endDate"></td>
+                <td class="status"></td>
+                <td class="isFeedback"></td>
+            </tr>
+            </tbody>
+            <tbody id="tr_cln"></tbody>
+        </table>
+        <!--分页-->
+        <div id="pager">
+            <a data-page="1">首页</a>
+            <a >末页</a>
+            <select id="pageSize">
+                <option>1</option>
+                <option>3</option>
+                <option selected="selected">5</option>
+            </select>
+            总共<span id="totalSize"></span>条数据
+            跳转<input type="text" id="pageNum">页
+        </div>
+    </div>
+</body>
+<script src="../../js/jquery-3.4.1.min.js"></script>
+<script src="../../js/queryEmployee.js"></script>
+</html>
